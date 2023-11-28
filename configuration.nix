@@ -14,9 +14,8 @@
   # Bootloader.
   boot.loader.grub = {
     enable = true;
-    forceInstall = true;
-    device = "/dev/nvme1n1";
-    useOSProber = true;
+    device = "/dev/nvme1n1"; 
+    useOSProber = true; # TODO dual boot with Windows
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -126,20 +125,20 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     nixos-option
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     less
     wget
     gitFull
     arandr
-    autorandr
+    autorandr # TODO find an alternative
     firefox
     qutebrowser
     thunderbird
     alacritty
     zsh
-    zsh-powerlevel10k
+    zsh-powerlevel10k # TODO set up zsh to replace bash
     tmux
-    exa
+    exa # TODO replace with eza
     ripgrep
     bat
     gnused
@@ -153,7 +152,19 @@
     ffmpeg
     logseq
     imagemagick_light
+    nextcloud-client # TODO enable autostart, keep login data
+    jetbrains.idea-ultimate
+    vscodium # consider vscodium-fhs
+    texlive.combined.scheme-medium
+    ansible
+    telegram-desktop
   ];
+
+  programs.neovim = {
+  enable = true;
+  defaultEditor = true;
+  };
+
 
 
 #  fonts = {
