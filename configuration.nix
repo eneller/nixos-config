@@ -131,7 +131,6 @@
     gitFull
     arandr
     autorandr # TODO find an alternative
-    firefox
     qutebrowser
     thunderbird
     alacritty
@@ -165,6 +164,17 @@
   defaultEditor = true;
   };
 
+
+
+  programs.firefox = {
+    enable = true; # TODO use home-manager
+    policies = {
+      DisablePocket = true;
+      ExtensionSettings = {};
+    };
+    preferencesStatus = "locked";
+    preferences = {};
+  };
 
 
 #  fonts = {
