@@ -109,9 +109,14 @@
   users.users.snow = {
     isNormalUser = true;
     description = "snow";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     ];
+  };
+
+  virtualisation.docker.rootless = {
+  enable = true;
+  setSocketVariable = true;
   };
 
   # Allow unfree packages
