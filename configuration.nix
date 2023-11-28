@@ -47,12 +47,17 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm = {
+  services.xserver = {
     enable = true;
+  # Enable the XFCE Desktop Environment.
+    displayManager.lightdm.enable = true;
+  # Configure keymap in X11
+    layout = "de";
+    xkbVariant = "";
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 35;
   };
+
   services.xserver.windowManager.i3 = {
     enable = true;
     extraPackages = with pkgs; [
@@ -71,11 +76,6 @@
     ];  
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
 
   # Configure console keymap
   console.keyMap = "de";
