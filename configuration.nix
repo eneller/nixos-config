@@ -8,7 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos> 
+      (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos")
+      #./home.nix
     ];
 
   # Bootloader.
@@ -151,12 +152,14 @@
     ffmpeg
     logseq
     imagemagick_light
-    nextcloud-client # TODO enable autostart, keep login data
+    nextcloud-client # TODO replace with rclone
     jetbrains.idea-ultimate
     vscodium # consider vscodium-fhs
     texlive.combined.scheme-medium
+    python3
     ansible
     telegram-desktop
+    home-manager
   ];
 
   programs.neovim = {
@@ -175,6 +178,7 @@
     preferencesStatus = "locked";
     preferences = {};
   };
+
 
 
 #  fonts = {
