@@ -17,7 +17,19 @@
     enable = true;
     device = "/dev/nvme1n1"; 
     useOSProber = true; # TODO dual boot with Windows
+    # timeoutStyle = "menu";
+    extraEntries = ''
+      menuentry "Windows 11" {
+	insmod part_gpt
+        insmod fat
+        insmod search_fs_uuid
+        insmod chain
+	search --no-floppy --set=root --fs-uuid B879-5057
+	ntldr /EFI/Microsoft/Boot/bootmgfw.efi
+      }
+    '';
   };
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
