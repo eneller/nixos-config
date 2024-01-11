@@ -21,7 +21,9 @@
           specialArgs = {inherit inputs;};
           modules = [ 
             ./configuration.nix
+	    ./config/locale.nix
 	    ./config/gui.nix
+	    ./config/i3.nix
             # inputs.home-manager.nixosModules.default
           ];
         };
