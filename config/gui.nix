@@ -14,4 +14,13 @@ environment.systemPackages = with pkgs; [
   texlive.combined.scheme-medium
   telegram-desktop
 ];
+  programs.firefox = {
+    enable = true; # TODO use home-manager
+    policies = {
+      DisablePocket = true;
+      ExtensionSettings = {};
+    };
+    preferencesStatus = "locked";
+    preferences = {};
+  };
 }

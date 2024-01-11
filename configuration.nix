@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs,  ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./home.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -74,6 +74,12 @@
     ];
   };
 
+  home-manager = {
+    # also pass inputs to home-manager modules
+    extraSpecialArgs = {inherit inputs; };
+    users.snow = import ./home.nix;
+  };
+
   virtualisation.docker.rootless = {
   enable = true;
   setSocketVariable = true;
@@ -82,49 +88,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    nixos-option
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    less
-    wget
-    gitFull
-    zsh
-    zsh-powerlevel10k # TODO set up zsh to replace bash
-    tmux
-    eza # TODO replace with eza
-    ripgrep
-    bat
-    gnused
-    gawk
-    file
-    htop
-    inxi
-    openssl
-    ffmpeg
-    imagemagick_light
-    nextcloud-client # TODO replace with rclone
-    python3
-    ansible
-  ];
-
-  programs.neovim = {
-  enable = true;
-  defaultEditor = true;
-  };
 
 
 
-  programs.firefox = {
-    enable = true; # TODO use home-manager
-    policies = {
-      DisablePocket = true;
-      ExtensionSettings = {};
-    };
-    preferencesStatus = "locked";
-    preferences = {};
-  };
 
 
 
