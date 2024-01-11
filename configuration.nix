@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos")
       #./home.nix
     ];
 
@@ -150,7 +149,7 @@
     zsh
     zsh-powerlevel10k # TODO set up zsh to replace bash
     tmux
-    exa # TODO replace with eza
+    eza # TODO replace with eza
     ripgrep
     bat
     gnused
@@ -171,7 +170,6 @@
     python3
     ansible
     telegram-desktop
-    home-manager
   ];
 
   programs.neovim = {
@@ -238,6 +236,10 @@
   # HOME MANAGER
   #home-manager.users.snow = { pkgs, ... }: {};
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # dependency of logseq
+  ];
+
 
 
 }
